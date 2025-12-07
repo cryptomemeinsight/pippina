@@ -47,9 +47,21 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Cpath d='M0 20 Q 15 5 30 20 T 60 20 Q 45 35 30 20 T 0 20 Z' fill='%23FFB6D6' stroke='%23000000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     }
     .bottom-section picture { display: block; width: 100%; }
-    .bottom-img { display: block; width: 100%; height: auto; object-fit: contain; }
+    .bottom-img { 
+      display: block; 
+      width: 100%; 
+      height: auto; 
+      object-fit: contain; 
+      cursor: pointer;
+    }
+    img {
+      -webkit-user-drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
     
-
     .main { flex: 1; display: grid; place-items: center; padding: 2vh 3vw 8vh; text-align: center; }
     .card { 
       max-width: 900px; 
@@ -296,6 +308,13 @@
       });
     }, { threshold: 0.6 });
     if (topGif) observer.observe(topGif);
+
+    // Disable right-click on all images
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+      }
+    });
 
     const bottomImg = document.querySelector('.bottom-img');
     const bottomSource = document.querySelector('.bottom-section source');
