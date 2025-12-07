@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pippina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="pippina.png">
+  <link href="https://db.onlinewebfonts.com/c/c37a9f31696dbcc8b86a42827beae565?family=Europa+Grotesk+SH+DemBol" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/europa-title" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Gochi+Hand&family=Titan+One&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #FFB6D6; --text: #000; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; overflow-x: hidden; }
+    body { margin: 0; background: var(--bg); color: var(--text); display: flex; flex-direction: column; min-height: 100vh; font-family: 'Europa Grotesk SH DemBol', 'Europa Grotesk', 'Europa Title', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    
+    .top { display: grid; place-items: center; padding: 8vh 3vw 0; }
+    .top-img { display: block; width: min(92vw, 400px); height: auto; margin-top: 0; }
+    .top-video { display: block; width: min(92vw, 900px); height: auto; }
+    .bottom-section { 
+      display: block; 
+      padding: 0; 
+      width: 100%; 
+      margin: 0; 
+      position: relative;
+    }
+    .bottom-section::before,
+    .bottom-section::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background-repeat: repeat-x;
+      background-size: 60px 100%;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .bottom-section::before {
+      top: -20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Cpath d='M0 20 Q 15 5 30 20 T 60 20 Q 45 35 30 20 T 0 20 Z' fill='%23FFB6D6' stroke='%23000000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .bottom-section::after {
+      bottom: -20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'%3E%3Cpath d='M0 20 Q 15 5 30 20 T 60 20 Q 45 35 30 20 T 0 20 Z' fill='%23FFB6D6' stroke='%23000000' stroke-width='12' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+    .bottom-section picture { display: block; width: 100%; }
+    .bottom-img { display: block; width: 100%; height: auto; object-fit: contain; }
+    
+
+    .main { flex: 1; display: grid; place-items: center; padding: 2vh 3vw 8vh; text-align: center; }
+    .card { 
+      max-width: 900px; 
+      width: auto; 
+      display: inline-block;
+      padding: 8px 8px 8px 24px; 
+      border-radius: 100px; 
+      background: #FFFFFF; 
+      border: 3px solid #000; 
+      box-shadow: 4px 4px 0px rgba(0,0,0,1); 
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px rgba(0,0,0,1); }
+    .card-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .contract { font-weight: 800; letter-spacing: 0.02em; font-size: clamp(16px, 3vw, 20px); color: #000; font-family: 'Inter', sans-serif; }
+    .copy-btn { 
+      appearance: none; 
+      border: 2px solid #000; 
+      background: #FFB6D6; 
+      color: #000; 
+      padding: 10px 24px; 
+      border-radius: 100px; 
+      font-weight: 800; 
+      font-size: 14px; 
+      cursor: pointer; 
+      text-transform: uppercase;
+      transition: all 0.2s; 
+    }
+    .copy-btn:hover { background: #000; color: #fff; transform: rotate(-2deg); }
+    .copy-btn:active { transform: scale(0.95); }
+    
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+        border-radius: 24px;
+        width: 92vw;
+        text-align: center;
+      }
+      .card-inner {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .contract {
+        font-size: 14px;
+        word-break: break-all;
+      }
+      .copy-btn {
+        width: 100%;
+      }
+      .contract { font-size: clamp(14px, 4vw, 24px); }
+      .top { padding: 8vh 0 0; }
+      .top-img { width: 100vw; max-width: 100vw; height: auto; margin-top: 0; }
+      .top-video { width: 100vw; max-width: 100vw; height: auto; margin-top: 8vh; }
+      .main { display: flex; flex-direction: column; align-items: center; padding: 0 3vw 4vh; }
+      .pippina-title { margin-bottom: 4px; }
+    }
+    .section { padding: 6vh 3vw; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-title { font-weight: 800; letter-spacing: 0.02em; font-size: clamp(20px, 4.5vw, 40px); text-align: center; color: var(--text); margin: 0 0 20px; }
+    .pippina-title { 
+      font-family: 'Titan One', cursive; 
+      font-size: clamp(30px, 6vw, 60px); 
+      color: white;
+      -webkit-text-stroke: 3px black;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      line-height: 1;
+    }
+    .title-icon {
+      width: clamp(32px, 6vw, 64px);
+      height: auto;
+      object-fit: contain;
+      animation: coinFlip 4s linear infinite;
+    }
+    
+    .footer {
+      width: 100%;
+      background: #d1effa;
+      color: #000;
+      padding: 12px 16px;
+      text-align: center;
+      font-family: 'Gochi Hand', cursive;
+      font-weight: 400;
+      font-size: 24px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .footer-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      animation: coinFlip 4s linear infinite;
+    }
+    @keyframes coinFlip {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .gallery-item { border: 1px solid rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; background: #FCFCFC; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+    .gallery-item img { width: 100%; height: 100%; display: block; object-fit: cover; aspect-ratio: 1; }
+    @media (max-width: 600px) {
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-item img { width: 100%; height: auto; object-fit: contain; aspect-ratio: auto; }
+    }
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 50; }
+    .lightbox.open { display: flex; }
+    .lightbox-content { border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); }
+    .lightbox-content img { max-width: 92vw; max-height: 92vh; width: auto; height: auto; display: block; background: #000; }
+    .lightbox-close { position: absolute; top: 16px; right: 16px; background: #fff; color: #000; border: none; border-radius: 8px; padding: 8px 12px; font-weight: 700; cursor: pointer; }
+    
+    .navbar {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      min-width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      padding: 16px 40px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 100px;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      transform-origin: center;
+    }
+    .nav-link:hover { opacity: 1; transform: scale(1.3); }
+    @media (max-width: 600px) {
+      .navbar { top: 16px; padding: 12px 24px; gap: 20px; min-width: auto; width: 90%; }
+      .nav-link { font-size: 12px; }
+    }
+  </style>
+</head>
+  <body>
+
+  <nav class="navbar">
+    <a href="https://pump.fun/coin/CY2REbm1T3qTpC4Bwri4mcQB1geSToCw4Whs9vMJpump" target="_blank" class="nav-link">Buy Now</a>
+    <a href="https://dexscreener.com/solana/BgwSm1JPufaKQVD9uefLucpbE2iH9PWxjJMFueJbcHHW" target="_blank" class="nav-link"><img src="https://cdn.prod.website-files.com/6421d264d066fd2b24b91b20/661375b92a7e161501f4b5e5_dexscreener.322a5a2d.png" alt="Dexscreener" style="height: 24px; width: auto; vertical-align: middle;"></a>
+    <a href="https://x.com/pippinacoin" target="_blank" class="nav-link"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X" style="height: 18px; width: auto; vertical-align: middle;"></a>
+  </nav>
+
+  <section class="top">
+    <img class="top-img" src="pippina.gif" alt="">
+  </section>
+
+  <main class="main">
+    <div class="section-title pippina-title">
+      $PIPPINA
+      <img src="pippina.png" class="title-icon" alt="Pippina">
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div id="contractText" class="contract">CY2REbm1T3qTpC4Bwri4mcQB1geSToCw4Whs9vMJpump</div>
+        <button id="copyBtn" class="copy-btn" aria-label="Copy contract address">Copy</button>
+      </div>
+    </div>
+  </main>
+
+  <section class="bottom-section">
+    <picture>
+      <source media="(max-width: 600px)" srcset="pippin%20and%20pippina%20mobile.png">
+      <img class="bottom-img" src="pippin%20and%20pippina%20web.png" alt="Pippin and Pippina">
+    </picture>
+  </section>
+
+  <footer class="footer">
+    <img src="pippina.png" class="footer-icon" alt="Pippina">
+    $pippina ♡'S U
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    
+    const textEl = document.getElementById('contractText');
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn?.addEventListener('click', async () => {
+      const text = textEl?.textContent?.trim() || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const prev = copyBtn.textContent;
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = prev; }, 1500);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const prev = copyBtn.textContent;
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = prev; }, 1500);
+      }
+    });
+
+    
+    const fartAudio = new Audio('fart.mp3');
+    fartAudio.preload = 'auto';
+    let fartTimer;
+    let fartInterval;
+    const playFart = () => { fartAudio.currentTime = 0; fartAudio.play().catch(() => {}); };
+    const startFartSchedule = () => {
+      if (fartTimer) clearTimeout(fartTimer);
+      if (fartInterval) clearInterval(fartInterval);
+      fartTimer = setTimeout(() => {
+        playFart();
+        fartInterval = setInterval(playFart, 5000);
+      }, 5000);
+    };
+    const stopFartSchedule = () => {
+      if (fartTimer) { clearTimeout(fartTimer); fartTimer = undefined; }
+      if (fartInterval) { clearInterval(fartInterval); fartInterval = undefined; }
+    };
+    const topGif = document.querySelector('.top-img');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) startFartSchedule();
+        else stopFartSchedule();
+      });
+    }, { threshold: 0.6 });
+    if (topGif) observer.observe(topGif);
+
+    const bottomImg = document.querySelector('.bottom-img');
+    const bottomSource = document.querySelector('.bottom-section source');
+    const wowAudio = new Audio('wow.mp3');
+    let hasSwapped = false;
+
+    bottomImg?.addEventListener('click', () => {
+      if (!hasSwapped) {
+        wowAudio.currentTime = 0;
+        wowAudio.play().catch(() => {});
+        
+        bottomImg.src = 'pippin%20and%20pippina%20web%202.png';
+        if (bottomSource) bottomSource.srcset = 'pippin%20and%20pippina%20mobile%202.png';
+        hasSwapped = true;
+        
+        // Trigger confetti
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    });
+  </script>
+
+  
+</body>
+</html>
