@@ -200,6 +200,29 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       border-radius: 100px;
     }
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FFB6D6;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease-out;
+    }
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-icon {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      animation: coinFlip 2s linear infinite;
+    }
     .nav-link {
       text-decoration: none;
       color: #000;
@@ -221,6 +244,10 @@
   </style>
 </head>
   <body>
+  
+  <div class="loader">
+    <img src="pippina.png" class="loader-icon" alt="Loading...">
+  </div>
 
   <nav class="navbar">
     <a href="https://pump.fun/coin/CY2REbm1T3qTpC4Bwri4mcQB1geSToCw4Whs9vMJpump" target="_blank" class="nav-link">Buy Now</a>
@@ -259,6 +286,13 @@
   
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    window.addEventListener('load', () => {
+      const loader = document.querySelector('.loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => { loader.remove(); }, 500);
+      }
+    });
     
     const textEl = document.getElementById('contractText');
     const copyBtn = document.getElementById('copyBtn');
